@@ -10,7 +10,7 @@ export class UserController{
         if(error instanceof CustomError){
                 return res.status(error.statusCode).json({error:error.message})
         }
-            console.log(error)
+        console.log(error)
         res.status(500).json({error:'Internal Server error'})
     }
 
@@ -19,6 +19,7 @@ export class UserController{
         if(error) {
             return res.status(400).json({error})
         }
+       
         new SharedLocation(this.userRepository)
         .execute(sharedLocationDto!)
         .then(data => res.json(data) )

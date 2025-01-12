@@ -9,6 +9,7 @@ export class SharedLocationDto{
     ){}
     static create( object: { [ key: string ]: any; } ): [ string?, SharedLocationDto?]{
         const {reason,coordinates,email}=object
+
         if(!reason) return ['Missing reason']
         if(!email) return ['Missing email']
         if(!Validators.maxCharacters(reason)) return ['Watch out, you’ve exceeded the 60-character limit! Less is more']

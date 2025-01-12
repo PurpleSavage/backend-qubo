@@ -8,6 +8,7 @@ export class UserDatasourceImpl implements UserDataSource{
     constructor(){}
     async sharedLocation(sharedLocationDto: SharedLocationDto): Promise<PositionEntity> {
         const {reason,coordinates,email}=sharedLocationDto
+    
         try {
             const position = await PositionModel.create({
                 email,

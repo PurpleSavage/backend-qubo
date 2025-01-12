@@ -13,6 +13,7 @@ export class SharedLocation implements SharedLocationUseCase{
         private readonly userRepository : UserRepository
     ){}
     async execute(sharedLocationDto: SharedLocationDto): Promise<PositionEntity> {
+       
         const position = await this.userRepository.sharedLocation(sharedLocationDto)
         if(!position) throw CustomError.internalServer('A problem occurred while registering your location.')
         return {

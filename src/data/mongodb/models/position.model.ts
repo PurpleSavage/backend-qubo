@@ -1,5 +1,9 @@
 import mongoose,{Schema} from "mongoose";
 const positionScheme = new Schema({
+    email:{
+        type:String,
+        required:[true, 'Email is required']
+    },
     reason:{
         type:String,
         required:[true, 'Reason is required']
