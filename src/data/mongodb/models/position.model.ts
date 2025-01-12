@@ -1,5 +1,11 @@
 import mongoose,{Schema} from "mongoose";
 const positionScheme = new Schema({
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref: "User", 
+        required: true,
+        unique:true
+    },
     email:{
         type:String,
         required:[true, 'Email is required']

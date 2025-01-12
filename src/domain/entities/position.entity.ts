@@ -5,6 +5,7 @@ export interface GeoJSONPoint {
 export class PositionEntity{
     constructor(
         public id :string,
+        public userId:string,
         public email:string,
         public reason:string,
         public coordinates: GeoJSONPoint

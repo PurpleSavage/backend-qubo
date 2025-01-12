@@ -18,6 +18,7 @@ export class SharedLocation implements SharedLocationUseCase{
         if(!position) throw CustomError.internalServer('A problem occurred while registering your location.')
         return {
             id:position.id,
+            userId:position.userId,
             email:position.email,
             reason: position.reason,
             coordinates:position.coordinates

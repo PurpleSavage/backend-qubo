@@ -5,12 +5,14 @@ import { PositionMapper } from "../mappers/position.mapper";
 
 
 export class UserDatasourceImpl implements UserDataSource{
-    constructor(){}
     async sharedLocation(sharedLocationDto: SharedLocationDto): Promise<PositionEntity> {
-        const {reason,coordinates,email}=sharedLocationDto
+        const {reason,coordinates,email,userId}=sharedLocationDto
     
         try {
+            const userPositionExist = await PositionModel.findOne({userId:userId})
+            if(userPositionExist) throw CustomError.badRequest('Your location has already been recorded.')
             const position = await PositionModel.create({
+                userId,
                 email,
                 reason,
                 coordinates
