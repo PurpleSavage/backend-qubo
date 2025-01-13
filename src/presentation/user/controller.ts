@@ -1,4 +1,4 @@
-import { CustomError, SharedLocation, SharedLocationDto, UserRepository } from "../../domain"
+import { CustomError, SearchNearestLocations, SearchNearestLocationsDto, SharedLocation, SharedLocationDto, UserRepository } from "../../domain"
 import { Request, Response } from "express"
 
 
@@ -25,5 +25,16 @@ export class UserController{
         .then(data => res.json(data) )
         .catch(error => this.handlerError(error, res) )
 
+    }
+    searchNEarestLocations=(req:Request,res:Response)=>{
+        const [error,searchNearestLocationsDto]=SearchNearestLocationsDto.create(req.body)
+        if(error) {
+            return res.status(400).json({error})
+        }
+
+        new SearchNearestLocations(this.userRepository)
+        .execute(searchNearestLocationsDto!)
+        .then(data => res.json(data))
+        .catch(error => this.handlerError(error, res))
     }
 }

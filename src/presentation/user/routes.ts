@@ -11,6 +11,7 @@ export class UserRoutes{
 
 
         router.post('/shared-location',AuthMiddleware.validateJWT,controller.sharedLocation) 
+        router.post('/nearest-locations',AuthMiddleware.validateJWT,)
         return router
     }
 }
