@@ -45,7 +45,7 @@ export class UserDatasourceImpl implements UserDataSource{
                     $match: { email: { $ne: email } }  //  para evitar que se incluya la ubicación del mismo usuario si ya está registrada
                 },
             ]);
-    
+       
             return nearestLocations.map(location => PositionMapper.positionEntityFromObject(location));
         } catch (error) {
             if(error instanceof CustomError){

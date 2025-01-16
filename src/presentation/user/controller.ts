@@ -26,7 +26,8 @@ export class UserController{
         .catch(error => this.handlerError(error, res) )
 
     }
-    searchNEarestLocations=(req:Request,res:Response)=>{
+    searchNearestLocations=(req:Request,res:Response)=>{
+
         const [error,searchNearestLocationsDto]=SearchNearestLocationsDto.create(req.body)
         if(error) {
             return res.status(400).json({error})
