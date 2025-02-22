@@ -2,6 +2,7 @@
 import { BcryptAdapter } from "../../config";
 import { UserModel } from "../../data/mongodb";
 import { AuthDataSource, CustomError, LoginUserDto, RegisterUserDto, UserEntity } from "../../domain";
+import { VerifyUserDto } from "../../domain/dtos/auth/verify-user.dto";
 import { UserMapper } from "../mappers/user.mapper";
 
 
@@ -50,8 +51,25 @@ export class AuthDatasourceImpl implements AuthDataSource{
             if ( !isMatching ) throw CustomError.badRequest('Password is not valid');
             return UserMapper.userEntityFromObject(user);
         } catch (error) {
-            console.log(error); 
-            throw CustomError.internalServer();
+            if(error instanceof CustomError){
+                throw error;
+            }
+            throw CustomError.internalServer()
+        }
+    }
+    async verifyEmail(verifyUserDto: VerifyUserDto): Promise<boolean> {
+        const {email}=verifyUserDto
+        try {
+            const user = await UserModel.findOne({email})
+            if ( !user ) return false
+            return true
+
+            
+        } catch (error) {
+            if(error instanceof CustomError){
+                throw error;
+            }
+            throw CustomError.internalServer()
         }
     }
 }

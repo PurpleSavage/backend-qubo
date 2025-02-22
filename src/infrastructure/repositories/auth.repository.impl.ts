@@ -1,4 +1,5 @@
 import { AuthDataSource, AuthRepository, LoginUserDto, RegisterUserDto, UserEntity } from "../../domain";
+import { VerifyUserDto } from "../../domain/dtos/auth/verify-user.dto";
 
 export class AuthRepositoryImpl implements AuthRepository{
     constructor(
@@ -9,5 +10,8 @@ export class AuthRepositoryImpl implements AuthRepository{
     }
     login(loginUserDto: LoginUserDto): Promise<UserEntity> {
         return this.authDatasource.login(loginUserDto)
+    }
+    verifyEmail(verifyUserDto: VerifyUserDto): Promise<boolean> {
+        return this.authDatasource.verifyEmail(verifyUserDto)
     }
 }
